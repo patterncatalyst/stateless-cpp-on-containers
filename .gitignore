@@ -1,0 +1,62 @@
+# Build outputs
+build/
+build-*/
+out/
+*.o
+*.a
+*.so
+*.so.*
+*.dylib
+
+# Conan 2.x
+.conan2/
+conan_toolchain.cmake
+CMakeUserPresets.json
+conandata.yml
+test_package/build/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+compile_commands.json
+CTestTestfile.cmake
+
+# Coverage
+*.gcda
+*.gcno
+*.gcov
+coverage/
+coverage.info
+
+# Profiling
+*.prof
+perf.data*
+callgrind.out.*
+massif.out.*
+
+# Generated protobuf code (regenerate from .proto)
+*.pb.cc
+*.pb.h
+*.grpc.pb.cc
+*.grpc.pb.h
+
+# IDE / editors
+.vscode/
+.idea/
+.vs/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Local environment / secrets
+.env
+.env.local
+*.local.yaml
+
+# Backup files from editing
+*.bak
+*.orig
