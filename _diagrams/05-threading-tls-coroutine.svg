@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 580" width="940" height="580" font-family="Helvetica, Arial, sans-serif">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1e1e1e"/></marker></defs>
+<text x="470" y="32" font-size="22" font-weight="600" text-anchor="middle" fill="#1e1e1e">05 — Threading: TLS Is Process-Scoped, Coroutines Migrate</text>
+<rect x="60" y="100" width="380" height="200" rx="8" ry="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+<text x="250" y="122" font-size="14" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#2563eb">OS Thread A  (gRPC pool)</text>
+<rect x="500" y="100" width="380" height="200" rx="8" ry="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+<text x="690" y="122" font-size="14" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#2563eb">OS Thread B  (gRPC pool)</text>
+<rect x="90" y="155" width="320" height="38" rx="8" ry="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/><text x="250.0" y="174.0" font-size="12" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">thread_local g_correlation_id</text>
+<text x="250" y="215" font-size="11" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#1e1e1e"><tspan x="250" dy="0">TLS is process-scoped</tspan><tspan x="250" dy="13">— persists across requests on this thread</tspan></text>
+<rect x="530" y="155" width="320" height="38" rx="8" ry="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/><text x="690.0" y="174.0" font-size="12" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">thread_local g_correlation_id</text>
+<text x="690" y="215" font-size="11" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#1e1e1e"><tspan x="690" dy="0">Different TLS slot here —</tspan><tspan x="690" dy="13">resume after co_await sees this</tspan></text>
+<rect x="330" y="360" width="280" height="110" rx="8" ry="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+<text x="470" y="382" font-size="13" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#16a34a">Coroutine frame  (request scope)</text>
+<text x="470" y="410" font-size="12" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="hanging" fill="#1e1e1e">auto rows = co_await db.query();</text>
+<text x="470" y="440" font-size="12" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="hanging" fill="#dc2626">log_info(g_correlation_id, ...);</text>
+<line x1="250" y1="300" x2="380" y2="360" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+<text x="280" y="333" font-size="11" font-family="Helvetica, Arial, sans-serif" text-anchor="start" dominant-baseline="hanging" fill="#dc2626">suspend</text>
+<line x1="560" y1="360" x2="690" y2="300" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+<text x="620" y="333" font-size="11" font-family="Helvetica, Arial, sans-serif" text-anchor="start" dominant-baseline="hanging" fill="#dc2626">resume (different thread!)</text>
+<rect x="60" y="500" width="820" height="60" rx="8" ry="8" fill="#fecaca" stroke="#dc2626" stroke-width="2"/>
+<text x="470" y="520" font-size="13" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#dc2626">Trap: TLS read after co_await may differ from before. Capture into the coroutine frame.</text>
+<text x="470" y="543" font-size="12" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="hanging" fill="#1e1e1e">Mitigation: const auto correlation_id = req.correlation_id();  // before any co_await</text>
+</svg>

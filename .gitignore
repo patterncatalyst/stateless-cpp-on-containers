@@ -60,3 +60,10 @@ Thumbs.db
 # Backup files from editing
 *.bak
 *.orig
+
+# Python (used by _diagrams/ generator)
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/

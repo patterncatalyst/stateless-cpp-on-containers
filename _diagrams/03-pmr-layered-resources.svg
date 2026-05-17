@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="900" height="560" font-family="Helvetica, Arial, sans-serif">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1e1e1e"/></marker></defs>
+<text x="450" y="32" font-size="22" font-weight="600" text-anchor="middle" fill="#1e1e1e">03 — PMR Layered Resources for a Request Arena</text>
+<rect x="200" y="90" width="500" height="55" rx="8" ry="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/><text x="450.0" y="117.5" font-size="13" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">std::pmr::vector / pmr::string / pmr::unordered_map</text>
+<text x="720" y="118" font-size="11" font-family="Helvetica, Arial, sans-serif" text-anchor="start" dominant-baseline="middle" fill="#1e1e1e">PMR-aware containers</text>
+<rect x="200" y="160" width="500" height="55" rx="8" ry="8" fill="#fef3c7" stroke="#ca8a04" stroke-width="2"/><text x="450.0" y="187.5" font-size="13" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">std::pmr::polymorphic_allocator&lt;T&gt;</text>
+<text x="720" y="188" font-size="11" font-family="Helvetica, Arial, sans-serif" text-anchor="start" dominant-baseline="middle" fill="#1e1e1e">type-erased allocator (no template param)</text>
+<rect x="200" y="230" width="500" height="55" rx="8" ry="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/><text x="450.0" y="257.5" font-size="13" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">std::pmr::unsynchronized_pool_resource</text>
+<text x="720" y="258" font-size="11" font-family="Helvetica, Arial, sans-serif" text-anchor="start" dominant-baseline="middle" fill="#1e1e1e">size-class freelists for reuse within request</text>
+<rect x="200" y="300" width="500" height="55" rx="8" ry="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/><text x="450.0" y="327.5" font-size="13" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">std::pmr::monotonic_buffer_resource</text>
+<text x="720" y="328" font-size="11" font-family="Helvetica, Arial, sans-serif" text-anchor="start" dominant-baseline="middle" fill="#1e1e1e">bump pointer; do_deallocate = no-op</text>
+<rect x="200" y="370" width="500" height="55" rx="8" ry="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/><text x="450.0" y="397.5" font-size="13" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">std::array&lt;std::byte, 64 * 1024&gt;  (inline)</text>
+<text x="720" y="398" font-size="11" font-family="Helvetica, Arial, sans-serif" text-anchor="start" dominant-baseline="middle" fill="#1e1e1e">stack-allocated initial buffer</text>
+<rect x="200" y="440" width="500" height="55" rx="8" ry="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><text x="450.0" y="467.5" font-size="13" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">upstream: pool_resource or global heap</text>
+<text x="720" y="468" font-size="11" font-family="Helvetica, Arial, sans-serif" text-anchor="start" dominant-baseline="middle" fill="#1e1e1e">process-scoped fallback when arena overflows</text>
+<line x1="170" y1="115" x2="170" y2="510" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arr)"/>
+<text x="120" y="300" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#1e1e1e"><tspan x="120" dy="0">allocate</tspan><tspan x="120" dy="14">(downward)</tspan></text>
+<line x1="980" y1="510" x2="980" y2="115" stroke="#16a34a" stroke-width="2" marker-end="url(#arr)"/>
+<text x="1005" y="300" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="start" dominant-baseline="hanging" fill="#16a34a"><tspan x="1005" dy="0">release</tspan><tspan x="1005" dy="14">(O(1) on</tspan><tspan x="1005" dy="14">arena dtor)</tspan></text>
+</svg>

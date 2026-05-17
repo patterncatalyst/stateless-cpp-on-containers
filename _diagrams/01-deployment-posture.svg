@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 560" width="920" height="560" font-family="Helvetica, Arial, sans-serif">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1e1e1e"/></marker></defs>
+<text x="460" y="32" font-size="22" font-weight="600" text-anchor="middle" fill="#1e1e1e">01 — Same Binary, Two Deployment Postures</text>
+<rect x="380" y="70" width="160" height="50" rx="8" ry="8" fill="#fef3c7" stroke="#ca8a04" stroke-width="2"/><text x="460.0" y="95.0" font-size="14" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e"><tspan x="460.0" dy="-8.0">my-service</tspan><tspan x="460.0" dy="16">(C++ binary)</tspan></text>
+<line x1="440" y1="120" x2="230" y2="200" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="480" y1="120" x2="690" y2="200" stroke="#1e1e1e" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="60" y="200" width="340" height="320" rx="8" ry="8" fill="#fecaca" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="230" y="215" font-size="14" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#dc2626">STATEFUL DEPLOYMENT</text>
+<text x="230" y="240" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#dc2626">(unsafe to kill)</text>
+<rect x="100" y="270" width="260" height="40" rx="8" ry="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/><text x="230.0" y="290.0" font-size="12" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">static unordered_map cache</text>
+<rect x="100" y="320" width="260" height="40" rx="8" ry="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/><text x="230.0" y="340.0" font-size="12" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">logs to /var/log/svc.log</text>
+<rect x="100" y="370" width="260" height="40" rx="8" ry="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/><text x="230.0" y="390.0" font-size="12" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">session table in-process</text>
+<rect x="100" y="420" width="260" height="40" rx="8" ry="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/><text x="230.0" y="440.0" font-size="12" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">persistent volume mounted</text>
+<text x="230" y="490" font-size="14" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#dc2626">kill → data loss</text>
+<rect x="520" y="200" width="340" height="320" rx="8" ry="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="690" y="215" font-size="14" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#16a34a">STATELESS DEPLOYMENT</text>
+<text x="690" y="240" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#16a34a">(safe to kill, replace, scale)</text>
+<rect x="560" y="270" width="260" height="40" rx="8" ry="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/><text x="690.0" y="290.0" font-size="12" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">Redis cache (external)</text>
+<rect x="560" y="320" width="260" height="40" rx="8" ry="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/><text x="690.0" y="340.0" font-size="12" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">logs to stdout</text>
+<rect x="560" y="370" width="260" height="40" rx="8" ry="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/><text x="690.0" y="390.0" font-size="12" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">sessions in PostgreSQL</text>
+<rect x="560" y="420" width="260" height="40" rx="8" ry="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/><text x="690.0" y="440.0" font-size="12" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">read_only rootfs</text>
+<text x="690" y="490" font-size="14" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#16a34a">kill → orchestrator restarts</text>
+</svg>

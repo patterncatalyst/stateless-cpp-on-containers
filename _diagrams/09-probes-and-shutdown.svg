@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="Helvetica, Arial, sans-serif">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1e1e1e"/></marker></defs>
+<text x="480" y="32" font-size="22" font-weight="600" text-anchor="middle" fill="#1e1e1e">09 — Health Checks and Graceful Shutdown</text>
+<rect x="50" y="90" width="260" height="130" rx="8" ry="8" fill="#fef3c7" stroke="#ca8a04" stroke-width="2"/>
+<text x="180" y="120" font-size="15" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="hanging" fill="#ca8a04">startupProbe</text>
+<text x="180" y="150" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#1e1e1e">has it initialized?</text>
+<text x="180" y="190" font-size="11" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#ca8a04">until success: liveness/readiness are not run</text>
+<rect x="350" y="90" width="260" height="130" rx="8" ry="8" fill="#fecaca" stroke="#dc2626" stroke-width="2"/>
+<text x="480" y="120" font-size="15" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="hanging" fill="#dc2626">livenessProbe</text>
+<text x="480" y="150" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#1e1e1e">is it deadlocked?</text>
+<text x="480" y="190" font-size="11" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#dc2626">fail → restart container</text>
+<rect x="650" y="90" width="260" height="130" rx="8" ry="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+<text x="780" y="120" font-size="15" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="hanging" fill="#16a34a">readinessProbe</text>
+<text x="780" y="150" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#1e1e1e">should I route traffic?</text>
+<text x="780" y="190" font-size="11" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#16a34a">fail → remove from Service endpoints</text>
+<text x="480" y="260" font-size="13" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#1e1e1e">Graceful Shutdown Sequence (SIGTERM → SIGKILL within terminationGracePeriodSeconds)</text>
+<rect x="30" y="320" width="124" height="110" rx="8" ry="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><text x="92.0" y="375.0" font-size="10" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">1. SIGTERM</text>
+<line x1="154" y1="375" x2="162" y2="375" stroke="#2563eb" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="162" y="320" width="124" height="110" rx="8" ry="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><text x="224.0" y="375.0" font-size="10" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e"><tspan x="224.0" dy="-6.0">2. flip readiness → NOT_SERVING</tspan><tspan x="224.0" dy="12">(keep server-wide SERVING)</tspan></text>
+<line x1="286" y1="375" x2="294" y2="375" stroke="#2563eb" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="294" y="320" width="124" height="110" rx="8" ry="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><text x="356.0" y="375.0" font-size="10" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e"><tspan x="356.0" dy="-6.0">3. stop_source.request_stop()</tspan><tspan x="356.0" dy="12">(stops outbox / async workers)</tspan></text>
+<line x1="418" y1="375" x2="426" y2="375" stroke="#2563eb" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="426" y="320" width="124" height="110" rx="8" ry="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><text x="488.0" y="375.0" font-size="10" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e"><tspan x="488.0" dy="-6.0">4. server-&gt;Shutdown(deadline)</tspan><tspan x="488.0" dy="12">(drains in-flight RPCs)</tspan></text>
+<line x1="550" y1="375" x2="558" y2="375" stroke="#2563eb" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="558" y="320" width="124" height="110" rx="8" ry="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><text x="620.0" y="375.0" font-size="10" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e"><tspan x="620.0" dy="-6.0">5. main() returns:</tspan><tspan x="620.0" dy="12">reverse-order destructors</tspan></text>
+<line x1="682" y1="375" x2="690" y2="375" stroke="#2563eb" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="690" y="320" width="124" height="110" rx="8" ry="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><text x="752.0" y="375.0" font-size="10" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e"><tspan x="752.0" dy="-6.0">6. provider-&gt;ForceFlush()</tspan><tspan x="752.0" dy="12">(export buffered spans)</tspan></text>
+<line x1="814" y1="375" x2="822" y2="375" stroke="#2563eb" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="822" y="320" width="124" height="110" rx="8" ry="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><text x="884.0" y="375.0" font-size="10" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">7. process exits clean</text>
+<text x="480" y="470" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#1e1e1e">Liveness rarely fails (deadlocks only).  Readiness fails for transient conditions and during drain.</text>
+<text x="480" y="490" font-size="11" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#1e1e1e">Probes use the gRPC standard health protocol (grpc.health.v1.Health) via grpc_health_probe.</text>
+</svg>

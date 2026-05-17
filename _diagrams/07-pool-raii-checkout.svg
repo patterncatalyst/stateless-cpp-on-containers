@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 580" width="960" height="580" font-family="Helvetica, Arial, sans-serif">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1e1e1e"/></marker></defs>
+<text x="480" y="32" font-size="22" font-weight="600" text-anchor="middle" fill="#1e1e1e">07 — Connection Pool with RAII Checkout</text>
+<rect x="60" y="80" width="360" height="160" rx="8" ry="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+<text x="240" y="102" font-size="14" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#2563eb">PgPool  (process-scoped)</text>
+<rect x="90" y="145" width="60" height="60" rx="8" ry="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/><text x="120.0" y="175.0" font-size="12" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">conn 1</text>
+<rect x="165" y="145" width="60" height="60" rx="8" ry="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/><text x="195.0" y="175.0" font-size="12" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">conn 2</text>
+<rect x="240" y="145" width="60" height="60" rx="8" ry="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/><text x="270.0" y="175.0" font-size="12" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">conn 3</text>
+<rect x="315" y="145" width="60" height="60" rx="8" ry="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/><text x="345.0" y="175.0" font-size="12" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">conn N</text>
+<text x="240" y="220" font-size="11" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#1e1e1e">free list (mutex + condvar)</text>
+<rect x="60" y="320" width="360" height="200" rx="8" ry="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+<text x="240" y="342" font-size="14" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#16a34a">Handler  (request scope)</text>
+<rect x="85" y="375" width="310" height="32" rx="8" ry="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/><text x="240.0" y="391.0" font-size="12" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">auto conn = pool.acquire(50ms);</text>
+<rect x="85" y="413" width="310" height="32" rx="8" ry="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/><text x="240.0" y="429.0" font-size="12" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">conn-&gt;query(...)  // throws on error</text>
+<rect x="85" y="451" width="310" height="32" rx="8" ry="8" fill="#ffffff" stroke="#1e1e1e" stroke-width="2"/><text x="240.0" y="467.0" font-size="12" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="middle" fill="#1e1e1e">// conn destructs → release</text>
+<line x1="290" y1="240" x2="240" y2="320" stroke="#2563eb" stroke-width="2" marker-end="url(#arr)"/>
+<text x="295" y="280" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="start" dominant-baseline="hanging" fill="#2563eb">acquire</text>
+<line x1="180" y1="510" x2="130" y2="240" stroke="#16a34a" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+<text x="75" y="380" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="start" dominant-baseline="hanging" fill="#16a34a"><tspan x="75" dy="0">release</tspan><tspan x="75" dy="14">(RAII)</tspan></text>
+<rect x="620" y="230" width="280" height="100" rx="8" ry="8" fill="#fed7aa" stroke="#ea580c" stroke-width="2"/>
+<text x="760" y="252" font-size="14" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#ea580c">PostgreSQL  (external)</text>
+<text x="760" y="280" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#1e1e1e">authoritative state</text>
+<text x="760" y="300" font-size="11" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#1e1e1e">lives across replica restarts</text>
+<line x1="420" y1="280" x2="620" y2="280" stroke="#ea580c" stroke-width="2" marker-end="url(#arr)"/>
+<text x="520" y="268" font-size="11" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#ea580c">SQL</text>
+<rect x="440" y="380" width="220" height="110" rx="8" ry="8" fill="#fecaca" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="550" y="405" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#dc2626">broken_connection ?</text>
+<text x="550" y="430" font-size="12" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle" dominant-baseline="hanging" fill="#dc2626">→ conn.invalidate()</text>
+<text x="550" y="460" font-size="11" font-family="Helvetica, Arial, sans-serif" text-anchor="middle" dominant-baseline="hanging" fill="#dc2626">pool discards on release</text>
+<line x1="420" y1="440" x2="440" y2="440" stroke="#dc2626" stroke-width="2" marker-end="url(#arr)"/>
+</svg>

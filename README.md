@@ -71,6 +71,28 @@ The patterns and recommendations draw from a small number of well-thought-out so
 - Vernon, *Implementing Domain-Driven Design* (Addison-Wesley, 2013) — for the Outbox pattern
 - *The Twelve-Factor App* (Heroku, 2011/2017) — `12factor.net`
 
+## Diagrams
+
+Each content document has a paired diagram in [`_diagrams/`](_diagrams/), rendered in two formats:
+
+- `NN-name.svg` — static SVG, renders inline in GitHub
+- `NN-name.excalidraw` — Excalidraw JSON, importable into [excalidraw.com](https://excalidraw.com) or the Excalidraw plugin for VS Code/Obsidian for editing
+
+The diagrams use a consistent color vocabulary across all 11 figures:
+- **Blue** — process-scoped state
+- **Green** — request-scoped state
+- **Orange** — external state
+- **Red** — anti-patterns and traps
+- **Yellow** — accents and highlights
+
+The diagrams are generated from a small Python library (`_diagrams/diagram_lib.py` and `_diagrams/generate.py`). To regenerate after editing:
+
+```bash
+cd _diagrams && python3 generate.py
+```
+
+This makes it easy to extend the diagram set or tweak the visual style consistently across all figures.
+
 ## Versioning convention
 
 Documents use a `_rNN` suffix indicating the revision number. The initial baseline is `_r01`; subsequent revisions bump to `_r02`, `_r03`, etc., with prior revisions retained in git history for diff and rollback.
