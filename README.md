@@ -13,17 +13,17 @@ Documents are numbered for sequential reading. The full guide and reading paths 
 | # | Topic | File |
 |---|---|---|
 | 00 | Index and reading guide | [`00-index_r01.md`](docs/00-index_r01.md) |
-| 01 | Stateless vs stateful as deployment posture | [`01-deployment-posture_r01.md`](docs/01-deployment-posture_r01.md) |
-| 02 | RAII as the foundation for safe stateful work | [`02-raii_r01.md`](docs/02-raii_r01.md) |
-| 03 | PMR's `monotonic_buffer_resource` as architectural statelessness | [`03-pmr_r01.md`](docs/03-pmr_r01.md) |
-| 04 | Process-scoped state that's still stateless | [`04-process-scoped-state_r01.md`](docs/04-process-scoped-state_r01.md) |
-| 05 | Threading and concurrency in a stateless service | [`05-threading_r01.md`](docs/05-threading_r01.md) |
-| 06 | 12-Factor adapted to C++ | [`06-twelve-factor_r01.md`](docs/06-twelve-factor_r01.md) |
-| 07 | State externalization patterns | [`07-state-externalization_r01.md`](docs/07-state-externalization_r01.md) |
-| 08 | The ephemeral filesystem trap | [`08-ephemeral-filesystem_r01.md`](docs/08-ephemeral-filesystem_r01.md) |
-| 09 | Health checks as the public API of statelessness | [`09-health-checks_r01.md`](docs/09-health-checks_r01.md) |
-| 10 | Microservices with gRPC and C++ (capstone integration) | [`10-grpc-microservices_r01.md`](docs/10-grpc-microservices_r01.md) |
-| 11 | Build tooling appendix | [`11-build-tooling_r01.md`](docs/11-build-tooling_r01.md) |
+| 01 | Stateless vs stateful as deployment posture | [`01-deployment-posture_r02.md`](docs/01-deployment-posture_r02.md) |
+| 02 | RAII as the foundation for safe stateful work | [`02-raii_r02.md`](docs/02-raii_r02.md) |
+| 03 | PMR's `monotonic_buffer_resource` as architectural statelessness | [`03-pmr_r02.md`](docs/03-pmr_r02.md) |
+| 04 | Process-scoped state that's still stateless | [`04-process-scoped-state_r02.md`](docs/04-process-scoped-state_r02.md) |
+| 05 | Threading and concurrency in a stateless service | [`05-threading_r02.md`](docs/05-threading_r02.md) |
+| 06 | 12-Factor adapted to C++ | [`06-twelve-factor_r02.md`](docs/06-twelve-factor_r02.md) |
+| 07 | State externalization patterns | [`07-state-externalization_r02.md`](docs/07-state-externalization_r02.md) |
+| 08 | The ephemeral filesystem trap | [`08-ephemeral-filesystem_r02.md`](docs/08-ephemeral-filesystem_r02.md) |
+| 09 | Health checks as the public API of statelessness | [`09-health-checks_r02.md`](docs/09-health-checks_r02.md) |
+| 10 | Microservices with gRPC and C++ (capstone integration) | [`10-grpc-microservices_r02.md`](docs/10-grpc-microservices_r02.md) |
+| 11 | Build tooling appendix | [`11-build-tooling_r02.md`](docs/11-build-tooling_r02.md) |
 
 **If you read only three documents**, read 01 (vocabulary), 04 (the State Architecture Table), and 10 (the integration). They cover the architectural shape without the depth on individual mechanisms.
 
@@ -73,9 +73,9 @@ The patterns and recommendations draw from a small number of well-thought-out so
 
 ## Diagrams
 
-Each content document has a paired diagram in [`_diagrams/`](_diagrams/), rendered in two formats:
+Each content document has a paired diagram in [`diagrams/`](diagrams/), embedded inline at the top of the corresponding markdown file (renders inline when viewing on GitHub). Each diagram is rendered in two formats:
 
-- `NN-name.svg` — static SVG, renders inline in GitHub
+- `NN-name.svg` — static SVG, renders inline in GitHub and other markdown viewers
 - `NN-name.excalidraw` — Excalidraw JSON, importable into [excalidraw.com](https://excalidraw.com) or the Excalidraw plugin for VS Code/Obsidian for editing
 
 The diagrams use a consistent color vocabulary across all 11 figures:
@@ -85,10 +85,10 @@ The diagrams use a consistent color vocabulary across all 11 figures:
 - **Red** — anti-patterns and traps
 - **Yellow** — accents and highlights
 
-The diagrams are generated from a small Python library (`_diagrams/diagram_lib.py` and `_diagrams/generate.py`). To regenerate after editing:
+The diagrams are generated from a small Python library (`diagrams/diagram_lib.py` and `diagrams/generate.py`). To regenerate after editing:
 
 ```bash
-cd _diagrams && python3 generate.py
+cd diagrams && python3 generate.py
 ```
 
 This makes it easy to extend the diagram set or tweak the visual style consistently across all figures.
